@@ -4,7 +4,8 @@
 
 | Документ | Описание |
 |----------|----------|
-| [obzor.md](obzor.md) | Обзор продукта: что такое WSC, сервисы, WAF, Browser Isolation, URL masking |
+| [produkt.md](produkt.md) | Описание продукта для стейкхолдеров: что это, для чего, как работает, роли |
+| [obzor.md](obzor.md) | Обзор продукта: сервисы, WAF, Browser Isolation, URL masking |
 | [arkhitektura.md](arkhitektura.md) | Архитектура и поток данных |
 | [master-prompt.md](master-prompt.md) | Мастер-промпт для генерации и разработки (RU + EN) |
 | [okruzhenie.md](okruzhenie.md) | Окружение разработки: Docker, pnpm, Playwright |
@@ -12,7 +13,7 @@
 
 ## Для кого
 
-- **Стейкхолдеры** — начните с [обзора](obzor.md)
+- **Стейкхолдеры** — начните с [описания продукта](produkt.md), затем [обзор](obzor.md)
 - **Архитекторы и разработчики** — [архитектура](arkhitektura.md), [решения](resheniya.md), [мастер-промпт](master-prompt.md)
 - **DevOps / локальный запуск** — [окружение](okruzhenie.md)
 
