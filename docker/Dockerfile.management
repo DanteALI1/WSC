@@ -1,0 +1,14 @@
+FROM node:22-bookworm-slim AS base
+RUN corepack enable && corepack prepare pnpm@9.15.0 --activate
+WORKDIR /app
+COPY package.json pnpm-workspace.yaml pnpm-lock.yaml* .npmrc turbo.json ./
+COPY apps/management/package.json apps/management/
+COPY packages/config/package.json packages/config/
+COPY packages/waf-schema/package.json packages/waf-schema/
+RUN pnpm install --filter @wsc/management...
+COPY apps/management apps/management
+COPY packages/config packages/config
+COPY packages/waf-schema packages/waf-schema
+RUN pnpm --filter @wsc/config build && pnpm --filter @wsc/waf-schema build && pnpm --filter @wsc/management build
+WORKDIR /app/apps/management
+CMD ["node", "dist/main.js"]

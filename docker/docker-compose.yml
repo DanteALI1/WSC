@@ -1,0 +1,117 @@
+name: wsc
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: wsc
+      POSTGRES_PASSWORD: wsc
+      POSTGRES_DB: wsc
+    ports:
+      - "5432:5432"
+    volumes:
+      - wsc_pg:/var/lib/postgresql/data
+    networks:
+      - wsc_internal
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    networks:
+      - wsc_internal
+
+  minio:
+    image: minio/minio:latest
+    command: server /data --console-address ":9001"
+    environment:
+      MINIO_ROOT_USER: wsc
+      MINIO_ROOT_PASSWORD: wscsecret12
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    volumes:
+      - wsc_minio:/data
+    networks:
+      - wsc_internal
+
+  mailhog:
+    image: mailhog/mailhog:latest
+    profiles:
+      - dev
+    ports:
+      - "1025:1025"
+      - "8025:8025"
+    networks:
+      - wsc_internal
+
+  wsc-waf:
+    image: owasp/modsecurity-crs:nginx
+    hostname: wsc-waf
+    expose:
+      - "8080"
+    networks:
+      - wsc_internal
+    volumes:
+      - ./waf/modsecurity.conf:/etc/modsecurity.d/modsecurity.conf:ro
+    read_only: true
+
+  wsc-gateway:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.gateway
+    environment:
+      GATEWAY_PORT: "3001"
+      WAF_SIDECAR_URL: http://wsc-waf:8080
+      DATABASE_URL: postgres://wsc:wsc@postgres:5432/wsc
+      REDIS_URL: redis://redis:6379
+    ports:
+      - "3001:3001"
+    depends_on:
+      - postgres
+      - redis
+      - wsc-waf
+    networks:
+      - wsc_internal
+
+  wsc-management:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.management
+    environment:
+      MANAGEMENT_PORT: "3002"
+      DATABASE_URL: postgres://wsc:wsc@postgres:5432/wsc
+      REDIS_URL: redis://redis:6379
+    ports:
+      - "3002:3002"
+    depends_on:
+      - postgres
+      - redis
+    networks:
+      - wsc_internal
+
+  wsc-analytics:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.analytics
+    environment:
+      ANALYTICS_PORT: "3003"
+      DATABASE_URL: postgres://wsc:wsc@postgres:5432/wsc
+      REDIS_URL: redis://redis:6379
+      MINIO_ENDPOINT: minio:9000
+    ports:
+      - "3003:3003"
+    depends_on:
+      - postgres
+      - redis
+      - minio
+    networks:
+      - wsc_internal
+
+networks:
+  wsc_internal:
+    driver: bridge
+
+volumes:
+  wsc_pg:
+  wsc_minio:
