@@ -2,14 +2,17 @@
 
 Enterprise secure web access: portal, Browser Isolation, WAF (ModSecurity + OWASP CRS), session analytics, centralized management.
 
+## Documentation
+
+- **[Architecture & master prompt](docs/wsc-architecture-prompt.md)** — product vision, system design, stack, UX, WAF, phased delivery, and the master coding prompt
+- Full index: [docs/](docs/)
+
 ## Architecture
 
 - **wsc-gateway** — portal, isolation workers, URL masking
 - **wsc-waf** — ModSecurity sidecar (internal only)
 - **wsc-management** — users, apps, TLS, WAF rules
 - **wsc-analytics** — sessions, screenshots, WAF timeline
-
-Detailed architecture and master prompt: Project Context → `docs/wsc-architecture-prompt.md`.
 
 ## Monorepo
 
