@@ -1,0 +1,68 @@
+/**
+ * WSC design tokens — shared across Portal / Management / Analytics.
+ * Direction: cool mist atmosphere, ink brand type, teal signal accent.
+ * Avoids Inter/Roboto/Arial, purple-indigo AI look, cream+terracotta broadsheet.
+ */
+
+:root {
+  /* Brand */
+  --wsc-brand: 'Web Security Connect';
+  --wsc-brand-short: 'WSC';
+
+  /* Surfaces */
+  --wsc-ink: #0b1520;
+  --wsc-ink-soft: #152433;
+  --wsc-mist: #e7eef2;
+  --wsc-mist-deep: #d2dde4;
+  --wsc-paper: #f4f7f9;
+  --wsc-haze: rgba(11, 21, 32, 0.06);
+
+  /* Signal accent (teal — not purple) */
+  --wsc-signal: #1a8f8a;
+  --wsc-signal-strong: #127570;
+  --wsc-signal-soft: #d4efed;
+  --wsc-warn: #b56a2b;
+
+  /* Text */
+  --wsc-text: #0b1520;
+  --wsc-text-muted: #5a6b78;
+  --wsc-text-on-ink: #eef4f7;
+  --wsc-text-on-signal: #f4fbfb;
+
+  /* Typography — consumers wire font-family via next/font or link tags */
+  --wsc-font-display: 'Bricolage Grotesque', 'Segoe UI', sans-serif;
+  --wsc-font-body: 'Sora', 'Segoe UI', sans-serif;
+
+  --wsc-fs-hero: clamp(2.75rem, 6vw, 4.5rem);
+  --wsc-fs-title: clamp(1.5rem, 2.5vw, 2rem);
+  --wsc-fs-body: 1rem;
+  --wsc-fs-small: 0.875rem;
+  --wsc-lh-tight: 1.05;
+  --wsc-lh-body: 1.55;
+
+  /* Space & radius */
+  --wsc-space-1: 0.25rem;
+  --wsc-space-2: 0.5rem;
+  --wsc-space-3: 0.75rem;
+  --wsc-space-4: 1rem;
+  --wsc-space-5: 1.5rem;
+  --wsc-space-6: 2rem;
+  --wsc-space-8: 3rem;
+  --wsc-radius-sm: 6px;
+  --wsc-radius-md: 10px;
+  --wsc-sidebar-width: 15.5rem;
+
+  /* Atmosphere */
+  --wsc-atmosphere:
+    radial-gradient(120% 80% at 12% -10%, rgba(26, 143, 138, 0.18), transparent 55%),
+    radial-gradient(90% 70% at 88% 8%, rgba(21, 36, 51, 0.12), transparent 50%),
+    radial-gradient(70% 60% at 70% 100%, rgba(26, 143, 138, 0.1), transparent 45%),
+    linear-gradient(165deg, #eef3f6 0%, #dfe8ee 48%, #d5e1e8 100%);
+
+  --wsc-atmosphere-ink:
+    radial-gradient(100% 80% at 0% 0%, rgba(26, 143, 138, 0.22), transparent 50%),
+    radial-gradient(80% 60% at 100% 20%, rgba(180, 210, 220, 0.08), transparent 45%),
+    linear-gradient(160deg, #0b1520 0%, #122030 55%, #0e1a28 100%);
+
+  --wsc-noise: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E");
+}

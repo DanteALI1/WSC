@@ -5,6 +5,11 @@ function envInt(name: string, fallback: number): number {
   return Number.isNaN(n) ? fallback : n;
 }
 
+export const portalConfig = {
+  port: envInt('PORTAL_PORT', 3000),
+  publicUrl: process.env.PORTAL_PUBLIC_URL ?? 'http://localhost:3000',
+};
+
 export const gatewayConfig = {
   port: envInt('GATEWAY_PORT', 3001),
   wafSidecarUrl: process.env.WAF_SIDECAR_URL ?? 'http://wsc-waf:8080',
