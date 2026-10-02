@@ -40,7 +40,14 @@ sudo docker compose -f docker/docker-compose.yml up -d postgres redis minio
 pnpm dev
 ```
 
-Порты по умолчанию: Gateway `3001`, Management `3002`, Analytics `3003`, PostgreSQL `5432`, Redis `6379`, MinIO `9000` / `9001`.
+Порты по умолчанию: **Portal UI** `3000` (`apps/portal`, Next.js), Gateway API `3001`, Management `3002`, Analytics `3003`, PostgreSQL `5432`, Redis `6379`, MinIO `9000` / `9001`.
+
+Только портал (M1 UI):
+
+```bash
+pnpm --filter @wsc/portal dev
+# http://localhost:3000 — demo login: demo@wsc.local / любой пароль
+```
 
 ## Playwright (gateway)
 
@@ -65,8 +72,8 @@ sudo dockerd > /tmp/dockerd.log 2>&1
 
 ## Структура monorepo
 
-- `apps/gateway`, `apps/management`, `apps/analytics`
-- `packages/ui`, `packages/auth`, `packages/api-types`, `packages/config`, `packages/waf-schema`
+- `apps/portal` (Next.js UI), `apps/gateway`, `apps/management`, `apps/analytics`
+- `packages/ui` (`@wsc/ui` tokens + компоненты), `packages/auth`, `packages/api-types`, `packages/config`, `packages/waf-schema`
 - `docker/` — Compose, Dockerfile’ы, конфиг WAF
 
 ## См. также

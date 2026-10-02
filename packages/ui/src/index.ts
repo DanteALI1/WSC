@@ -1,2 +1,6 @@
-/** Shared design system — Next.js apps will consume this package. */
-export const WSC_BRAND = 'Web Security Connect';
+export { WSC_BRAND, WSC_BRAND_SHORT, tokens } from './brand';
+
+export type { ButtonProps } from './components/Button';
+export { Button } from './components/Button';
+export type { BrandMarkProps } from './components/BrandMark';
+export { BrandMark } from './components/BrandMark';

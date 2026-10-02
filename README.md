@@ -14,7 +14,8 @@
 
 ## Сервисы
 
-- **wsc-gateway** — портал (sidebar, каталог), Browser Isolation, стрим UI, app-idle, URL masking
+- **wsc-portal** (`apps/portal`) — Next.js UI: login, sidebar, каталог, in-app workspace (M1)
+- **wsc-gateway** — Browser Isolation, стрим UI, app-idle, URL masking (API)
 - **wsc-management** — пользователи, RBAC, приложения, TLS, правила WAF, интеграции
 - **wsc-analytics** — сеансы, скриншоты, timeline WAF, отчёты
 - **wsc-waf** — sidecar ModSecurity 3 + OWASP CRS (только из gateway)
