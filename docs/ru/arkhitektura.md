@@ -4,7 +4,13 @@
 
 ## Системный контекст
 
-Три прикладных сервиса + WAF-sidecar + инфраструктура в Docker:
+Три прикладных сервиса + WAF-sidecar + инфраструктура в Docker.
+
+Схема подключений:
+
+![Архитектура WSC](assets/wsc-architecture.svg)
+
+Исходник (Mermaid): [assets/wsc-architecture.mmd](assets/wsc-architecture.mmd).
 
 ```mermaid
 flowchart LR

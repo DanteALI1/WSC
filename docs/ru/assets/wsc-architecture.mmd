@@ -1,0 +1,39 @@
+%% WSC — архитектура подключений
+%% Companion source for docs/ru/assets/wsc-architecture.svg
+flowchart TB
+  User["Пользователь<br/>браузер"]
+  Admin["Администраторы"]
+  Analyst["Аналитики"]
+
+  Gateway["Шлюз · Portal<br/>wsc-gateway"]
+  Isolation["Browser Isolation<br/>workers · Chromium"]
+  WAF["WAF<br/>wsc-waf"]
+  Target["Целевые приложения<br/>Target Web Apps"]
+
+  Mgmt["Управление<br/>wsc-management"]
+  Analytics["Аналитика<br/>wsc-analytics"]
+
+  PG1[(PostgreSQL)]
+  Redis[(Redis)]
+  Certs["Encrypted certs<br/>TLS / mTLS store"]
+  PG2[(PostgreSQL)]
+  MinIO[(MinIO)]
+
+  User --> Gateway
+  Admin --> Mgmt
+  Analyst --> Analytics
+
+  Gateway --> Isolation
+  Isolation --> WAF
+  WAF --> Target
+
+  Mgmt --> PG1
+  Mgmt --> Redis
+  Mgmt --> Certs
+  Mgmt -->|"rules / certs / policies"| Gateway
+
+  Analytics --> PG2
+  Analytics --> MinIO
+
+  Gateway -->|"сеансы · скриншоты"| Analytics
+  WAF -->|"WAF events"| Analytics

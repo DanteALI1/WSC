@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 720" width="1100" height="720" role="img" aria-labelledby="title desc">
+  <title id="title">Архитектура подключений WSC</title>
+  <desc id="desc">Пользовательский браузер → шлюз (portal) → Browser Isolation → WAF → целевые приложения. Админы → управление. Аналитики → аналитика. Management настраивает gateway; gateway и WAF пишут в analytics.</desc>
+
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#334155"/>
+    </marker>
+    <marker id="arrow-accent" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#0f766e"/>
+    </marker>
+    <marker id="arrow-data" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#b45309"/>
+    </marker>
+    <filter id="shadow" x="-2%" y="-2%" width="104%" height="108%">
+      <feDropShadow dx="0" dy="1" stdDeviation="1.5" flood-color="#0f172a" flood-opacity="0.08"/>
+    </filter>
+    <style type="text/css"><![CDATA[
+      .bg { fill: #f8fafc; }
+      .frame { fill: #ffffff; stroke: #cbd5e1; stroke-width: 1.5; }
+      .frame-actor { fill: #f1f5f9; stroke: #94a3b8; stroke-width: 1.5; }
+      .frame-core { fill: #ffffff; stroke: #0f766e; stroke-width: 2; }
+      .frame-infra { fill: #fffbeb; stroke: #d97706; stroke-width: 1.5; }
+      .frame-target { fill: #eff6ff; stroke: #2563eb; stroke-width: 1.5; }
+      .label-title { font-family: 'DejaVu Sans', 'Segoe UI', Arial, sans-serif; font-size: 15px; font-weight: 700; fill: #0f172a; }
+      .label-sub { font-family: 'DejaVu Sans', 'Segoe UI', Arial, sans-serif; font-size: 12px; fill: #475569; }
+      .label-ru { font-family: 'DejaVu Sans', 'Segoe UI', Arial, sans-serif; font-size: 11px; font-weight: 600; fill: #0f766e; }
+      .label-actor { font-family: 'DejaVu Sans', 'Segoe UI', Arial, sans-serif; font-size: 13px; font-weight: 600; fill: #1e293b; }
+      .label-edge { font-family: 'DejaVu Sans', 'Segoe UI', Arial, sans-serif; font-size: 11px; fill: #334155; }
+      .label-edge-data { font-family: 'DejaVu Sans', 'Segoe UI', Arial, sans-serif; font-size: 11px; fill: #92400e; }
+      .label-edge-cfg { font-family: 'DejaVu Sans', 'Segoe UI', Arial, sans-serif; font-size: 11px; fill: #0f766e; }
+      .diagram-title { font-family: 'DejaVu Sans', 'Segoe UI', Arial, sans-serif; font-size: 20px; font-weight: 700; fill: #0f172a; }
+      .diagram-sub { font-family: 'DejaVu Sans', 'Segoe UI', Arial, sans-serif; font-size: 12px; fill: #64748b; }
+      .flow { fill: none; stroke: #334155; stroke-width: 2; marker-end: url(#arrow); }
+      .flow-cfg { fill: none; stroke: #0f766e; stroke-width: 2; stroke-dasharray: 6 4; marker-end: url(#arrow-accent); }
+      .flow-data { fill: none; stroke: #b45309; stroke-width: 2; stroke-dasharray: 5 3; marker-end: url(#arrow-data); }
+      .legend-box { fill: #ffffff; stroke: #e2e8f0; stroke-width: 1; }
+    ]]></style>
+  </defs>
+
+  <rect class="bg" width="1100" height="720" rx="8"/>
+
+  <text x="40" y="36" class="diagram-title">WSC — архитектура подключений</text>
+  <text x="40" y="56" class="diagram-sub">Web Security Connect · Browser Isolation · WAF · Management · Analytics</text>
+
+  <g filter="url(#shadow)">
+    <rect class="frame-actor" x="40" y="90" width="160" height="52" rx="6"/>
+  </g>
+  <text x="120" y="112" text-anchor="middle" class="label-actor">Пользователь</text>
+  <text x="120" y="130" text-anchor="middle" class="label-sub">браузер</text>
+
+  <g filter="url(#shadow)">
+    <rect class="frame-actor" x="470" y="90" width="160" height="52" rx="6"/>
+  </g>
+  <text x="550" y="112" text-anchor="middle" class="label-actor">Администраторы</text>
+  <text x="550" y="130" text-anchor="middle" class="label-sub">Security / System Admin</text>
+
+  <g filter="url(#shadow)">
+    <rect class="frame-actor" x="900" y="90" width="160" height="52" rx="6"/>
+  </g>
+  <text x="980" y="112" text-anchor="middle" class="label-actor">Аналитики</text>
+  <text x="980" y="130" text-anchor="middle" class="label-sub">Analyst / Auditor</text>
+
+  <g filter="url(#shadow)">
+    <rect class="frame-core" x="40" y="200" width="200" height="88" rx="8"/>
+  </g>
+  <text x="140" y="228" text-anchor="middle" class="label-ru">Шлюз · Portal</text>
+  <text x="140" y="250" text-anchor="middle" class="label-title">wsc-gateway</text>
+  <text x="140" y="270" text-anchor="middle" class="label-sub">каталог · стрим UI · masking</text>
+
+  <g filter="url(#shadow)">
+    <rect class="frame" x="40" y="340" width="200" height="72" rx="8"/>
+  </g>
+  <text x="140" y="368" text-anchor="middle" class="label-title">Browser Isolation</text>
+  <text x="140" y="388" text-anchor="middle" class="label-sub">workers · Chromium</text>
+
+  <g filter="url(#shadow)">
+    <rect class="frame-core" x="40" y="460" width="200" height="72" rx="8"/>
+  </g>
+  <text x="140" y="488" text-anchor="middle" class="label-ru">WAF</text>
+  <text x="140" y="510" text-anchor="middle" class="label-title">wsc-waf</text>
+
+  <g filter="url(#shadow)">
+    <rect class="frame-target" x="40" y="580" width="200" height="72" rx="8"/>
+  </g>
+  <text x="140" y="608" text-anchor="middle" class="label-ru">Целевые приложения</text>
+  <text x="140" y="630" text-anchor="middle" class="label-title">Target Web Apps</text>
+
+  <g filter="url(#shadow)">
+    <rect class="frame-core" x="430" y="200" width="220" height="88" rx="8"/>
+  </g>
+  <text x="540" y="228" text-anchor="middle" class="label-ru">Управление</text>
+  <text x="540" y="250" text-anchor="middle" class="label-title">wsc-management</text>
+  <text x="540" y="270" text-anchor="middle" class="label-sub">RBAC · apps · TLS · WAF rules</text>
+
+  <g filter="url(#shadow)">
+    <rect class="frame-core" x="860" y="200" width="200" height="88" rx="8"/>
+  </g>
+  <text x="960" y="228" text-anchor="middle" class="label-ru">Аналитика</text>
+  <text x="960" y="250" text-anchor="middle" class="label-title">wsc-analytics</text>
+  <text x="960" y="270" text-anchor="middle" class="label-sub">сеансы · отчёты · WAF</text>
+
+  <g filter="url(#shadow)">
+    <rect class="frame-infra" x="400" y="360" width="120" height="56" rx="6"/>
+  </g>
+  <text x="460" y="384" text-anchor="middle" class="label-title">PostgreSQL</text>
+  <text x="460" y="402" text-anchor="middle" class="label-sub">данные · audit</text>
+
+  <g filter="url(#shadow)">
+    <rect class="frame-infra" x="540" y="360" width="120" height="56" rx="6"/>
+  </g>
+  <text x="600" y="384" text-anchor="middle" class="label-title">Redis</text>
+  <text x="600" y="402" text-anchor="middle" class="label-sub">сессии · pub/sub</text>
+
+  <g filter="url(#shadow)">
+    <rect class="frame-infra" x="470" y="440" width="160" height="56" rx="6"/>
+  </g>
+  <text x="550" y="464" text-anchor="middle" class="label-title">Encrypted certs</text>
+  <text x="550" y="482" text-anchor="middle" class="label-sub">TLS / mTLS store</text>
+
+  <g filter="url(#shadow)">
+    <rect class="frame-infra" x="840" y="360" width="120" height="56" rx="6"/>
+  </g>
+  <text x="900" y="384" text-anchor="middle" class="label-title">PostgreSQL</text>
+  <text x="900" y="402" text-anchor="middle" class="label-sub">events meta</text>
+
+  <g filter="url(#shadow)">
+    <rect class="frame-infra" x="980" y="360" width="120" height="56" rx="6"/>
+  </g>
+  <text x="1040" y="384" text-anchor="middle" class="label-title">MinIO</text>
+  <text x="1040" y="402" text-anchor="middle" class="label-sub">скрины · артефакты</text>
+
+  <path class="flow" d="M120 142 V200"/>
+  <path class="flow" d="M550 142 V200"/>
+  <path class="flow" d="M980 142 V200"/>
+
+  <path class="flow" d="M140 288 V340"/>
+  <text x="156" y="320" class="label-edge">stream / session</text>
+  <path class="flow" d="M140 412 V460"/>
+  <text x="156" y="442" class="label-edge">HTTP(S) upstream</text>
+  <path class="flow" d="M140 532 V580"/>
+  <text x="156" y="562" class="label-edge">allowlisted only</text>
+
+  <path class="flow" d="M500 288 V360"/>
+  <path class="flow" d="M580 288 V360"/>
+  <path class="flow" d="M540 288 V320 H550 V440"/>
+
+  <path class="flow" d="M920 288 V360"/>
+  <path class="flow" d="M1000 288 V360"/>
+
+  <path class="flow-cfg" d="M430 244 H240"/>
+  <text x="300" y="232" text-anchor="middle" class="label-edge-cfg">rules / certs / policies</text>
+
+  <path class="flow-data" d="M240 260 H400 V520 H860 V288"/>
+  <text x="620" y="540" text-anchor="middle" class="label-edge-data">сеансы · скриншоты</text>
+
+  <path class="flow-data" d="M240 496 H780 V260 H860"/>
+  <text x="520" y="488" class="label-edge-data">WAF events</text>
+
+  <rect class="legend-box" x="400" y="560" width="660" height="100" rx="8"/>
+  <text x="420" y="586" class="label-title">Обозначения</text>
+
+  <line x1="420" y1="610" x2="470" y2="610" class="flow" marker-end="url(#arrow)"/>
+  <text x="482" y="614" class="label-edge">основной поток / доступ</text>
+
+  <line x1="680" y1="610" x2="730" y2="610" class="flow-cfg" marker-end="url(#arrow-accent)"/>
+  <text x="742" y="614" class="label-edge-cfg">конфиг (Management → Gateway)</text>
+
+  <line x1="420" y1="640" x2="470" y2="640" class="flow-data" marker-end="url(#arrow-data)"/>
+  <text x="482" y="644" class="label-edge-data">телеметрия (Gateway / WAF → Analytics)</text>
+</svg>

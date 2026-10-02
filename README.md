@@ -4,6 +4,14 @@
 
 Администраторы управляют приложениями, политиками, сертификатами и правилами WAF; аналитики просматривают сеансы, скриншоты и инциденты. Вход единый, с переключением контуров Portal / Management / Analytics по правам.
 
+## Архитектура
+
+![Архитектура WSC](docs/ru/assets/wsc-architecture.svg)
+
+Пользовательский трафик идёт через шлюз (**Browser Isolation**) и **WAF** к целевым приложениям; **Management** публикует правила и сертификаты на gateway; **Analytics** записывает сеансы, скриншоты и события WAF.
+
+Исходник схемы (Mermaid): [docs/ru/assets/wsc-architecture.mmd](docs/ru/assets/wsc-architecture.mmd).
+
 ## Сервисы
 
 - **wsc-gateway** — портал (sidebar, каталог), Browser Isolation, стрим UI, app-idle, URL masking
