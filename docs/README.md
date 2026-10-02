@@ -1,7 +1,24 @@
-# WSC documentation
+# Документация WSC
+
+## Основной набор (русский)
+
+**[docs/ru/](ru/)** — актуальная документация на русском языке:
+
+| Документ | Описание |
+|----------|----------|
+| [ru/README.md](ru/README.md) | Оглавление русской документации |
+| [ru/obzor.md](ru/obzor.md) | Обзор продукта для стейкхолдеров |
+| [ru/arkhitektura.md](ru/arkhitektura.md) | Архитектура и поток данных |
+| [ru/master-prompt.md](ru/master-prompt.md) | Мастер-промпт (RU + EN приложение) |
+| [ru/okruzhenie.md](ru/okruzhenie.md) | Окружение разработки |
+| [ru/resheniya.md](ru/resheniya.md) | Зафиксированные решения |
+
+## English / legacy (исходники)
+
+Сохранены для совместимости и как источники; при расхождении приоритет у `docs/ru/`.
 
 | Document | Description |
 |----------|-------------|
-| [wsc-architecture-prompt.md](wsc-architecture-prompt.md) | Architecture, requirements, and master prompt for implementing the platform |
-| [project-context.md](project-context.md) | Short project context for agents and the team |
-| [dev-environment.md](dev-environment.md) | Dev environment tools status and setup commands |
+| [wsc-architecture-prompt.md](wsc-architecture-prompt.md) | Architecture + English master prompt (legacy / source) |
+| [project-context.md](project-context.md) | Short project context for agents |
+| [dev-environment.md](dev-environment.md) | Dev environment status (EN/mixed) |

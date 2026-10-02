@@ -1,52 +1,27 @@
 # WSC — Web Security Connect
 
-Enterprise secure web access: portal, Browser Isolation, WAF (ModSecurity + OWASP CRS), session analytics, centralized management.
+**WSC** — корпоративная платформа безопасного доступа к внутренним веб-приложениям через единый портал. Пользователь работает с целевыми системами внутри WSC: интерфейс стримится с удалённого браузера на шлюзе (**Browser Isolation**), реальные URL скрыты (**URL masking**), а весь трафик к приложениям проходит через **WAF** (ModSecurity + OWASP CRS).
 
-## Documentation
+Администраторы управляют приложениями, политиками, сертификатами и правилами WAF; аналитики просматривают сеансы, скриншоты и инциденты. Вход единый, с переключением контуров Portal / Management / Analytics по правам.
 
-- **[Architecture & master prompt](docs/wsc-architecture-prompt.md)** — product vision, system design, stack, UX, WAF, phased delivery, and the master coding prompt
-- Full index: [docs/](docs/)
+## Сервисы
 
-## Architecture
+- **wsc-gateway** — портал (sidebar, каталог), Browser Isolation, стрим UI, app-idle, URL masking
+- **wsc-management** — пользователи, RBAC, приложения, TLS, правила WAF, интеграции
+- **wsc-analytics** — сеансы, скриншоты, timeline WAF, отчёты
+- **wsc-waf** — sidecar ModSecurity 3 + OWASP CRS (только из gateway)
 
-- **wsc-gateway** — portal, isolation workers, URL masking
-- **wsc-waf** — ModSecurity sidecar (internal only)
-- **wsc-management** — users, apps, TLS, WAF rules
-- **wsc-analytics** — sessions, screenshots, WAF timeline
+## Документация
 
-## Monorepo
+- **Основная (RU):** [docs/ru/](docs/ru/) — обзор, архитектура, мастер-промпт, окружение, решения
+- Индекс всех материалов: [docs/](docs/)
 
-pnpm + Turborepo:
-
-- `apps/gateway`, `apps/management`, `apps/analytics`
-- `packages/ui`, `packages/auth`, `packages/api-types`, `packages/config`, `packages/waf-schema`
-
-## Quick start
+## Быстрый старт
 
 ```bash
 pnpm install
-pnpm build
-
-# Infrastructure (requires Docker daemon)
-sudo docker compose -f docker/docker-compose.yml up -d postgres redis minio
-
-# Dev APIs
+sudo docker compose -f docker/docker-compose.yml up -d
 pnpm dev
 ```
 
-Gateway Playwright (Browser Isolation):
-
-```bash
-cd apps/gateway && pnpm exec playwright install chromium
-```
-
-## Ports (default)
-
-| Service | Port |
-|---------|------|
-| Gateway | 3001 |
-| Management | 3002 |
-| Analytics | 3003 |
-| PostgreSQL | 5432 |
-| Redis | 6379 |
-| MinIO | 9000 / 9001 |
+Playwright (isolation на gateway): `cd apps/gateway && pnpm exec playwright install chromium`
